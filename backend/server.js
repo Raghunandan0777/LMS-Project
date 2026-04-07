@@ -32,15 +32,45 @@ app.use((err, req, res, next) => {
 });
 
 // DB + Start
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("MongoDB Connected");
-    app.listen(process.env.PORT || 5000, () =>
-      console.log(`Server running on port ${process.env.PORT || 5000}`)
-    );
-  })
-  .catch((err) => {
-    console.error("DB connection failed:", err.message);
-    process.exit(1);
-  });
+const startServer = (port = process.env.PORT || 5000, retries = 3) => {
+  mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+      console.log("✓ MongoDB Connected");
+
+      const server = app.listen(port, "0.0.0.0", () => {
+        console.log(`✓ Server running on port ${port}`);
+      });
+
+      // Handle port already in use
+      server.on("error", (err) => {
+        if (err.code === "EADDRINUSE") {
+          console.error(`✗ Port ${port} is already in use. Retrying with port ${port + 1}...`);
+          if (retries > 0) {
+            setTimeout(() => startServer(port + 1, retries - 1), 2000);
+          } else {
+            console.error("✗ Could not find available port after retries.");
+            process.exit(1);
+          }
+        } else {
+          console.error("✗ Server error:", err.message);
+          process.exit(1);
+        }
+      });
+
+      // Graceful shutdown
+      process.on("SIGTERM", () => {
+        console.log("SIGTERM received, closing server...");
+        server.close(() => {
+          console.log("Server closed");
+          process.exit(0);
+        });
+      });
+    })
+    .catch((err) => {
+      console.error("✗ DB connection failed:", err.message);
+      setTimeout(() => startServer(port, retries - 1), 3000);
+    });
+};
+
+startServer();
