@@ -39,6 +39,7 @@ import AdminInstructors from "./pages/admin/Instructors";
 
 // Shared
 import Profile from "./pages/shared/Profile";
+import LandingPage from "./pages/shared/LandingPage";
 
 const ProtectedRoute = ({ children, roles }) => {
   const { user, loading } = useAuth();
@@ -62,7 +63,7 @@ export default function App() {
           style: { background: "var(--bg3)", color: "var(--text)", border: "1px solid var(--border)" },
         }} />
         <Routes>
-          <Route path="/" element={<RoleRedirect />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 

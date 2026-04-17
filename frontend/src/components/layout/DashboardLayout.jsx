@@ -22,8 +22,7 @@ export default function DashboardLayout() {
       <div className="main-content">
         <div className="topbar">
           <button
-            className="btn btn-secondary btn-sm"
-            style={{ display: "none" }}
+            className="btn btn-secondary btn-sm sidebar-toggle"
             id="mobile-menu-btn"
             onClick={() => setSidebarOpen(true)}
           >

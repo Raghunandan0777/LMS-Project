@@ -8,11 +8,16 @@ require("dotenv").config();
 const app = express();
 
 // Middleware
-app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:3000", credentials: true }));
-app.use(express.json());
+app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:3000", "allowedHeaders": ["Content-Type", "Authorization"], credentials: true }));
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// Root route
+app.get("/", (req, res) => {
+  res.json({ message: "LMS Backend API is running", status: "ok" });
+});
 
 // Routes
 app.use("/api/auth", require("./routes/auth.routes"));
