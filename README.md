@@ -1,4 +1,4 @@
-# 🎓 LearnHub - Learning Management System (MERN Stack)
+# 🚀 EduFlow - Learning Management System (MERN Stack)
 
 A **professional, full-featured Learning Management System** built with MongoDB, Express.js, React, and Node.js. Designed for educational institutions to manage courses, lessons, quizzes, and student progress.
 
