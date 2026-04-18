@@ -7,8 +7,16 @@ require("dotenv").config();
 
 const app = express();
 
+// CORS Configuration for Production & Development
+const corsOptions = {
+  origin: process.env.CLIENT_URL || "http://localhost:3000",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
 // Middleware
-app.use(cors({ origin: process.env.CLIENT_URL || "https://lms-complete-project.onrender.com", "allowedHeaders": ["Content-Type", "Authorization"], credentials: true }));
+app.use(cors(corsOptions));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
