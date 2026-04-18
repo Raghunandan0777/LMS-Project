@@ -9,8 +9,8 @@ const app = express();
 
 // CORS Configuration for Production & Development
 const corsOptions = {
-  origin: process.env.CLIENT_URL || "https://lms-project-odk6.onrender.com",
-  credentials: true,
+    origin: process.env.CLIENT_URL || ["https://lms-project-odk6.onrender.com", "http://localhost:3000","https://lms-complete-project.onrender.com" ],
+    credentials: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
