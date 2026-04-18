@@ -6,7 +6,7 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     try {
-      const stored = localStorage.getItem("lms_user");
+      const stored = localStorage.getItem("eduflow_user");
       return stored && stored !== "undefined" ? JSON.parse(stored) : null;
     } catch (e) {
       localStorage.removeItem("lms_user");
@@ -16,17 +16,17 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("lms_token");
+    const token = localStorage.getItem("eduflow_token");
     if (token) {
       authAPI
         .getMe()
         .then((res) => {
           setUser(res.data.user);
-          localStorage.setItem("lms_user", JSON.stringify(res.data.user));
+          localStorage.setItem("eduflow_user", JSON.stringify(res.data.user));
         })
         .catch(() => {
-          localStorage.removeItem("lms_token");
-          localStorage.removeItem("lms_user");
+          localStorage.removeItem("eduflow_token");
+          localStorage.removeItem("eduflow_user");
           setUser(null);
         })
         .finally(() => setLoading(false));
@@ -37,8 +37,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const res = await authAPI.login({ email, password });
-    localStorage.setItem("lms_token", res.data.token);
-    localStorage.setItem("lms_user", JSON.stringify(res.data.user));
+    localStorage.setItem("eduflow_token", res.data.token);
+    localStorage.setItem("eduflow_user", JSON.stringify(res.data.user));
     setUser(res.data.user);
     return res.data.user;
   };
@@ -46,22 +46,22 @@ export const AuthProvider = ({ children }) => {
   const register = async (data) => {
     const res = await authAPI.register(data);
     if (res.data.token) {
-      localStorage.setItem("lms_token", res.data.token);
-      localStorage.setItem("lms_user", JSON.stringify(res.data.user));
+      localStorage.setItem("eduflow_token", res.data.token);
+      localStorage.setItem("eduflow_user", JSON.stringify(res.data.user));
       setUser(res.data.user);
     }
     return res.data;
   };
 
   const logout = () => {
-    localStorage.removeItem("lms_token");
-    localStorage.removeItem("lms_user");
+    localStorage.removeItem("eduflow_token");
+    localStorage.removeItem("eduflow_user");
     setUser(null);
   };
 
   const updateUser = (updated) => {
     setUser(updated);
-    localStorage.setItem("lms_user", JSON.stringify(updated));
+    localStorage.setItem("eduflow_user", JSON.stringify(updated));
   };
 
   return (

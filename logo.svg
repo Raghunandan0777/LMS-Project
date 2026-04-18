@@ -1,0 +1,40 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="#0D47A1" opacity="0.95"/>
+  <circle cx="100" cy="100" r="95" stroke="#1565C0" stroke-width="2"/>
+  
+  <!-- Gradient Definition -->
+  <defs>
+    <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#64B5F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F7931E;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Book Icon (Education) -->
+  <g transform="translate(100, 100)">
+    <!-- Book pages -->
+    <path d="M -20 -30 L -20 30 L 0 35 L 0 -25 Z" fill="url(#flowGradient)" stroke="#1565C0" stroke-width="1.5"/>
+    <path d="M 0 -25 L 0 35 L 20 30 L 20 -30 Z" fill="#42A5F5" stroke="#0D47A1" stroke-width="1.5"/>
+    
+    <!-- Flowing lines (representing flow/progress) -->
+    <path d="M -12 -15 Q 0 -10 12 -15" stroke="url(#accentGradient)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <path d="M -12 -5 Q 0 0 12 -5" stroke="url(#accentGradient)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <path d="M -12 5 Q 0 10 12 5" stroke="url(#accentGradient)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <path d="M -12 15 Q 0 20 12 15" stroke="url(#accentGradient)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    
+    <!-- Center accent circle -->
+    <circle cx="0" cy="0" r="4" fill="#FF6B35" opacity="0.9"/>
+  </g>
+  
+  <!-- Outer decorative ring -->
+  <circle cx="100" cy="100" r="85" stroke="#42A5F5" stroke-width="1" fill="none" opacity="0.5"/>
+  
+  <!-- Corner accent dots -->
+  <circle cx="25" cy="25" r="4" fill="#FF6B35" opacity="0.7"/>
+  <circle cx="175" cy="175" r="4" fill="#FF6B35" opacity="0.7"/>
+</svg>

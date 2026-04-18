@@ -1,4 +1,16 @@
-# 🚀 EduFlow - Learning Management System (MERN Stack)
+<div align="center">
+
+![EduFlow Logo](./logo.svg)
+
+# 🚀 EduFlow
+
+### Professional Learning Management System (MERN Stack)
+
+**A full-featured LMS for educational institutions to manage courses, lessons, quizzes, and student progress**
+
+</div>
+
+---
 
 A **professional, full-featured Learning Management System** built with MongoDB, Express.js, React, and Node.js. Designed for educational institutions to manage courses, lessons, quizzes, and student progress.
 
@@ -414,7 +426,7 @@ lms/
 
 ```env
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/lms_db
+MONGO_URI=mongodb://localhost:27017/eduflow_db
 JWT_SECRET=your_super_secret_key
 JWT_EXPIRE=7d
 NODE_ENV=development

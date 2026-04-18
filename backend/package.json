@@ -1,7 +1,7 @@
 {
   "name": "lms-backend",
   "version": "1.0.0",
-  "description": "Mini LMS Backend API",
+  "description": "EduFlow Backend API - Professional Learning Management System",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

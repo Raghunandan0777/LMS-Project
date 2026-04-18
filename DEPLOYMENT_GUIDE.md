@@ -1,4 +1,4 @@
-# 🚀 LMS Backend-Frontend Production Deployment Guide
+# 🚀 EduFlow Backend-Frontend Production Deployment Guide
 
 ## **EASY 3-STEP CONNECTION**
 
