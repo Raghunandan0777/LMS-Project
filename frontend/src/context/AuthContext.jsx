@@ -5,17 +5,30 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    const stored = localStorage.getItem("lms_user");
-    return stored ? JSON.parse(stored) : null;
+    try {
+      const stored = localStorage.getItem("lms_user");
+      return stored && stored !== "undefined" ? JSON.parse(stored) : null;
+    } catch (e) {
+      localStorage.removeItem("lms_user");
+      return null;
+    }
   });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("lms_token");
     if (token) {
-      authAPI.getMe()
-        .then((res) => { setUser(res.data.user); localStorage.setItem("lms_user", JSON.stringify(res.data.user)); })
-        .catch(() => { localStorage.removeItem("lms_token"); localStorage.removeItem("lms_user"); setUser(null); })
+      authAPI
+        .getMe()
+        .then((res) => {
+          setUser(res.data.user);
+          localStorage.setItem("lms_user", JSON.stringify(res.data.user));
+        })
+        .catch(() => {
+          localStorage.removeItem("lms_token");
+          localStorage.removeItem("lms_user");
+          setUser(null);
+        })
         .finally(() => setLoading(false));
     } else {
       setLoading(false);
@@ -52,7 +65,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, updateUser }}>
+    <AuthContext.Provider
+      value={{ user, loading, login, register, logout, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
