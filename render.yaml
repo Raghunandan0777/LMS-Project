@@ -1,9 +1,37 @@
 services:
+  # Backend API Service
+  - type: web
+    name: lms-api
+    runtime: node
+    buildCommand: cd backend && npm ci
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CLOUDINARY_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: CLIENT_URL
+        value: https://lms-complete-project.onrender.com
+
+  # Frontend Static Service
   - type: web
     name: lms-app
     env: static
     buildCommand: cd frontend && npm ci && npm run build
     staticPublishPath: frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://lms-api.onrender.com/api
     routes:
       - type: rewrite
         source: "/*"
