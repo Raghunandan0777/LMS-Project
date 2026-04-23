@@ -2,7 +2,7 @@ services:
   - type: web
     name: lms-app
     env: static
-    buildCommand: cd frontend && npm run build
+    buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/build
     routes:
       - type: rewrite
